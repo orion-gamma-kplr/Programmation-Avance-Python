@@ -1,7 +1,7 @@
 # Import des modules nécessaires
 import json
 from unidecode import unidecode
-import re
+#import re
 import os
 
 # Get the directory path of the current Python file
