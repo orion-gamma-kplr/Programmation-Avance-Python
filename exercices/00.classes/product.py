@@ -70,7 +70,7 @@ class Table(Meubles):
 class Chaise(Meubles):
 # Fonctions génériques
     def __str__(self):
-        return f"c'est une chaise {super().__str__()}"
+        return f"c'est une chaise {super().__str__()}"  
 
 def main():
     mobilier=[Canape(1000,2000,"OKLM","Cuir","Blanc",200,100,80),
