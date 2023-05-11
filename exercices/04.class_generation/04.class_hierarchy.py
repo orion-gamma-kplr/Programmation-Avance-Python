@@ -1,7 +1,9 @@
 # Import des modules nécessaires
 import json
 import os
+import re
 from unidecode import unidecode
+
 
 
 def json_dict_from_file():
@@ -71,10 +73,14 @@ Elle prend les arguments suivant:
 def generate_class_hierarchy(json_dict :dict, superclass_name:str=None,superclass_args:list=[]):
     # Initialisation de la chaîne de caractères contenant les définitions de classes
     class_defs = ""
+    super_attr=[]
 
 # Pour chaque nom de classe (class_name) et attribut de cette dernière (class_attrs) dans les éléments de  json_dict, faire:
     for class_name, class_attrs in json_dict.items():
 
+# Suppression des espaces dans le nom des classes
+        class_name=class_name.replace(" ","_").replace("-","_")
+        
 # Générer la définition de la classe avec la méthode generate_class_def() en passant les arguments superclass_name et superclass_args comme entrées
 # le résultat de la méthode generate_class_def() est stocker dans une variable 'class_def'
 # Concaténer la définition de la classe à la chaîne de caractères class_defs
@@ -84,11 +90,9 @@ def generate_class_hierarchy(json_dict :dict, superclass_name:str=None,superclas
 # Si "subclasses" existe parmi les attributs de la classe courante, faire:
 #                -Construire une liste "super_attr" contenant les attributs de la classe courante concaténées aux arguments de la superclasse
 #                -Puis, supprimer l'attribut 'subclasses' à partir de la liste créée
-        super_attr=superclass_args
         if "subclasses" in class_attrs:
-            for nom_attribut in class_attrs.keys():
-                if (nom_attribut != "subclasses"): # pour chaque attribut dans le dictionnaire d'attributs
-                    super_attr.append(nom_attribut) # si l'attribut n'est pas une sous-classe
+            super_attr= list(class_attrs.keys()) + superclass_args
+            super_attr.remove("subclasses")
 
 # Ensuite, faire une récursion pour générer la définition de la sous-classe en utilisant la méthode generate_class_hierarchy
 # En passant le nom de la classe courante en tant que superclass_name et la liste super_attr en tant que superclass_args
