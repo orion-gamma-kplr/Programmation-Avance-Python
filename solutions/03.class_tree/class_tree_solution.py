@@ -55,6 +55,7 @@ def recusive_tree_from_json(json_dict, parent_node_id):
 
             # Traverse any subclasses
             if "subclasses" in class_attrs:
+                print(class_attrs["subclasses"])
                 recusive_tree_from_json(class_attrs["subclasses"], class_node_id)
 
 def main():
@@ -64,7 +65,7 @@ def main():
     my_tree = create_tree_from_dict(json_dict)
 
     # Afficher l'arbre
-    my_tree.show()
+    #my_tree.show()
 
 if __name__ == '__main__':
     # Appeler la fonction principale
