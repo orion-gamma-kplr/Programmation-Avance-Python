@@ -95,7 +95,6 @@ def generate_class_hierarchy(json_dict :dict, superclass_name:str=None,superclas
 # Concaténer la définition de la sous-classe à la chaîne de caractères class_defs     
             class_defs+=generate_class_hierarchy(class_attrs["subclasses"],class_name,super_attr)
 
-
 # Retourne la chaîne de caractères contenant les définitions de classes
     return class_defs
 
@@ -124,7 +123,7 @@ def main():
     dictionnaire=json_dict_from_file()
 # Construction des classes
     code_classes=generate_class_hierarchy(dictionnaire,"")
-    print(code_classes)
+
 # Enregistrement dans un fichier
     write_content(code_classes,"exercices/04.class_generation/classes.py")
 
