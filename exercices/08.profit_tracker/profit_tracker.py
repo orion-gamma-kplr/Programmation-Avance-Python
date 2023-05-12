@@ -33,7 +33,7 @@ class ProfitTracker:
         """
         solde=product.cost*quantity
         if (solde > self.balance):
-            print(f"L'achat de {quantity} du produit {product.name} pour un coût unitaire de {product.cost} n'est pas possible pour une balance de {self.balance}")
+            print(f"L'achat de {quantity} unité(s) du produit {product.name} pour un coût unitaire de {product.cost} n'est pas possible pour une balance de {self.balance}")
             return False
         else:
             self.balance-=solde

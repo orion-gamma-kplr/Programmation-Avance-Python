@@ -1,12 +1,17 @@
-import sys
-sys.path.extend(['.','..'])
-from inventory.stock_manager import *
+import sys,os
+
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+sys.path.append(os.path.dirname(SCRIPT_DIR))
+
+from classes.product_classes import *
+from inventory.inventory_manager import *
+
 import json
 from unidecode import unidecode
-import generator
-from classes.product_classes import *
+#import generator
 import readline
 import utils
+import treelib
 
 # Define the prompt_for_instance function 
 # that takes a class name as a string as input
