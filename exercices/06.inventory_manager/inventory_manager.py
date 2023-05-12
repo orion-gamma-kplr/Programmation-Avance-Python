@@ -90,15 +90,11 @@ class InventoryManager:
         Elle prend en argument le nom du produit et la quantité à restocker.
         """
     def restock_product(self, product_name, quantity):
-        if (len(self.inventory) > 0):
-            if (self.product_exists(self.inventory[str(product_name)].product)):
-                self.inventory[product_name].restock(quantity)
-                print(f"Le stock du produit {product_name} a été mis à jour de {quantity} unité(s)")
-            else:
-                self.add_product(product).inventory.[product_name].restock(quantity)
-                
-        else:    
-            print("Pas de produit dans l'inventaire")
+        if (self.product_exists(self.inventory[str(product_name)].product)):
+            self.inventory[product_name].restock(quantity)
+            print(f"Le stock du produit {product_name} a été mis à jour de {quantity} unité(s)")
+        else:
+            self.add_product(self.inventory[str(product_name)].product,0)
         #Vérifier si le produit existe déjà dans l'inventaire
         #Si le produit est trouvé, appeler la méthode 'restock' de l'objet InventoryProductEntry correspondant avec la quantité à restocker
         #Si le réapprovisionnement est réussi, afficher un message de confirmation
@@ -110,13 +106,18 @@ class InventoryManager:
         La méthode get_product retourne toutes les informations liées au produit en faisant une recherche par son nom.
         Elle prend en entrée un nom de produit.
         """
-    def get_product(self, name):
+    def get_product(self, product_name):
         """
         pour chaque inventory_product_entry_key dans self.inventory:
             si inventory_product_entry_key == nom de produit:
                 retourner self.inventaire[inventory_product_entry_key].product
         afficher un message pour indiquer que le produit n'existe pas
         """
+        for inventory_product_entry_key in self.inventory.keys():
+            if (inventory_product_entry_key==product_name):
+                return self.inventory[inventory_product_entry_key].product
+            
+        return f"le produit {product_name} n'existe pas"
 
     #Méthode list_products
         """
@@ -129,16 +130,14 @@ class InventoryManager:
             afficher la valeur correspondante à cette clé
         retourner le dictionnaire inventaire
         """
+        for iep in self.inventory.values():
+            print(iep.__repr__())
+        return self.inventory
+    
 def main():
 # Initialisation des variables
     p1 = Product(100,200,"SIESTA")
     p2 = Biens_Consommation(100,200,"SIESTA")
-#    IEP1= InventoryProductEntry(p1,10)
-#    print(IEP1.__repr__())
-#    print(IEP1.sell(500))
-
-# Enregistrement dans un fichier
-#    print(IEP1.__repr__())
 
     IM1=InventoryManager()
     IM1.add_product(p1,10)
@@ -148,6 +147,8 @@ def main():
     print(IM1.product_exists(p2))
     print(IM1.inventory["Product"].product.marque)
     IM1.sell_product("Product",2)
+    IM1.list_products()
+
 #    IM1.remove_product("Product")
 #    print(len(IM1.inventory))  
 #    IM1.remove_product("Product")
