@@ -1,11 +1,15 @@
 #Importer les bibliothèques nécessaires
-import sys
+import sys,os
 import unittest
 sys.path.extend(['.','..'])
 
-#Import des classes à tester
-from classes.product_classes import Chaise, Pantalon
-from inventory.stock_manager import InventoryManager
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+sys.path.append(os.path.dirname(SCRIPT_DIR))
+
+# Import des classes à tester
+from classes.product_classes import Pantalon,Chaise
+from inventory.inventory_manager import InventoryManager
+from inventory.inventory_product_entry import InventoryProductEntry
 
 #Définition de la classe de test
 class TestInventoryManager(unittest.TestCase):
@@ -23,22 +27,29 @@ class TestInventoryManager(unittest.TestCase):
 
     # Test de la méthode add_product de la classe InventoryManager
     def test_add_product(self):
-        
-         """
-         -Ajout de 5 chaises à l'inventaire en utilisant la méthode add_product
-         -Vérification que la chaise a bien été ajoutée à l'inventaire avec la méthode assertIn ( assertIn(argument1, argument2) )
-         -assertIn est une méthode fournie par le module unittest de Python qui vérifie si le premier argument est contenu dans le second argument.
         """
-
+            add_product(self, product:Product, quantity)
+            Ajout de 5 chaises à l'inventaire en utilisant la méthode add_product
+            Vérification que la chaise a bien été ajoutée à l'inventaire avec la méthode assertIn ( assertIn(argument1, argument2) )
+            assertIn est une méthode fournie par le module unittest de Python qui vérifie si le premier argument est contenu dans le second argument.
+        """
+        print(len(self.inventory_manager.inventory))
+        self.inventory_manager.add_product(self.chaise,5)
+        print(len(self.inventory_manager.inventory))
+        self.assertIn('Chaise',self.inventory_manager.inventory,"Erreur")
     # Test de la méthode remove_product de la classe InventoryManager
     def test_remove_product(self):
-        
-         """
-         -Ajout de 5 pantalons à l'inventaire en utilisant la méthode add_product
-         -Suppression le pantalon de l'inventaire en utilisant la méthode remove_product
-         -Vérification que le pantalon a bien été supprimé de l'inventaire avec la méthode assertNotIn ( assertNotIn(argument1, argument2) )
-         -assertNotIn est une méthode qui permet de vérifier si un élément n'est pas présent dans une séquence
         """
+            -Ajout de 5 pantalons à l'inventaire en utilisant la méthode add_product
+            -Suppression le pantalon de l'inventaire en utilisant la méthode remove_product
+            -Vérification que le pantalon a bien été supprimé de l'inventaire avec la méthode assertNotIn ( assertNotIn(argument1, argument2) )
+            -assertNotIn est une méthode qui permet de vérifier si un élément n'est pas présent dans une séquence
+        """
+        self.inventory_manager.add_product(self.pantalon,5)
+        self.assertIn('Pantalon',self.inventory_manager.inventory,"Erreur")
+        self.inventory_manager.remove_product("Pantalon")
+        self.assertNotIn('Pantalon',self.inventory_manager.inventory,"Erreur")
+         
     # Test de la méthode sell_product de la classe InventoryManager
     def test_sell_product(self):
         """
@@ -74,7 +85,10 @@ class TestInventoryManager(unittest.TestCase):
         - Définir une variable qui contient la sortie attendue qui sera  "Chaise (Ikea): 5 in stock,  price:100"
         - Vérification que le premier résultat de la méthode list_products égal à la sortie attendue
         """
-        
+def main():
+    setup()
+    test_add_product()
+    test_remove_product()
 # Exécuter le code     
 if __name__ == '__main__':
     unittest.main()
