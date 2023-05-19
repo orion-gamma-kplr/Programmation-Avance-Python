@@ -36,7 +36,7 @@ class InventoryProductEntry:
         #Avant de mettre à jour l'état du stocke du produit, on doit vérifier si on a déjà une quantité suffisante à vendre.
 
         if (self.stock < quantity):     #SI la quantité en stock est inférieure à la quantité demandée:
-            print(f"Le stock du produit {self.product.marque} est insuffisant.")    # Afficher "Le stock du produit [nom du produit] est insuffisant."
+            print(f"Le stock du produit {self.product.name} est insuffisant.")    # Afficher "Le stock du produit [nom du produit] est insuffisant."
             return False    # Retourner Faux
         else: #SINON:
             self.stock-=quantity  #Réduire la quantité en stock par la quantité demandée
@@ -70,7 +70,7 @@ def main():
     p1 = Product(100,200,"SIESTA")
     IEP1= InventoryProductEntry(p1,10)
     print(IEP1.__repr__())
-    print(IEP1.sell(500))
+    print(IEP1.sell(5))
 # Enregistrement dans un fichier
     print(IEP1.__repr__())
 

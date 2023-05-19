@@ -52,7 +52,9 @@ def main():
 # Initialisation des variables
     p1 = Product(100,200,"SIESTA")
     pt = ProfitTracker()
+    print(pt.balance)
     vente=pt.buy_product(p1,1)
+    print(pt.balance)
     print(vente)
     pt.sell_product(p1,1)
     print(pt.balance)
